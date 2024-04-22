@@ -20,6 +20,8 @@ jobs:
         sudo apt install libfuse2 gnutls-dev
         sudo apt install autotools-dev autoconf automake build-essential meson ninja-build cmake
         wget https://raw.githubusercontent.com/Samueru-sama/AppMan-AppImage/main/appman-appimage.sh
+        mkdir -p $HOME/.config/appman
+        echo "Applications" >> $HOME/.config/appman/appman-config
         chmod a+x ./appman-appimage.sh
         ./appman-appimage.sh
         mkdir dist
