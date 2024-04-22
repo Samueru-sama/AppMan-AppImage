@@ -33,18 +33,27 @@ cat >> ./AppRun << 'EOF'
 #!/bin/sh
 
 CURRENTDIR="$(readlink -f "$(dirname "$0")")"
-export PATH="$CURRENTDIR/bin:$PATH"
+export PATH="$PATH:$CURRENTDIR/bin"
 export XDG_DATA_DIRS="$CURRENTDIR/share:$XDG_DATA_DIRS"
+
+version0=$(wget -q https://api.github.com/repos/Samueru-sama/AppMan-AppImage/releases -O - | grep -i continuous | grep browser_download_url | awk -F - '{print $(NF-1)}')
+version=$(cat $CURRENTDIR/version)
+if [ "$version" != "$version0" ] && [ ping -q -c1 github.com 2>&1 ] ; then
+	repeat 10 echo '------WARNING APPMAN IS OUTDATED, RUN >>> appman -u <<< TO UPDATE APPMAN NOW/!------'
+	echo "CURRENT VERSION = $version"
+	echo "NEW VERSION = $version0"
+fi
 
 if [ "$1" = "--TUI" ] || [ "$1" = "--tui" ]; then
 	"$CURRENTDIR/bin/apptui"
+else
+	"$CURRENTDIR/bin/appman" "$@"
 fi
-
-"$CURRENTDIR/bin/appman" "$@"
 EOF
 chmod a+x ./AppRun
-APPVERSION=$(./AppRun -v)
+APPVERSION=$(./bin/appman -v)
 if [ -z "$APPVERSION" ]; then echo "Failed to get version from appman"; exit 1; fi
+echo "$APPVERSION" >> ./version
 
 # DESKTOP & ICON
 touch ./DirIcon ./AppMan.png # THIS IS A DUMMY BECAUSE APPMAN DOESN'T HAVE AN OFFICIAL ICON YET I THINK
