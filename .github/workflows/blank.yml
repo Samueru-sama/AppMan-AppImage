@@ -17,7 +17,7 @@ jobs:
     - name: build
       run: |
         sudo apt update
-        sudo apt install libfuse2
+        sudo apt install libfuse2 gnutls-bin
         sudo apt install autotools-dev autoconf automake build-essential meson ninja-build cmake
         wget https://raw.githubusercontent.com/Samueru-sama/AppMan-AppImage/main/appman-appimage.sh
         chmod a+x ./appman-appimage.sh
