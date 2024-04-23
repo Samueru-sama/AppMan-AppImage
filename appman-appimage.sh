@@ -38,10 +38,8 @@ export XDG_DATA_DIRS="$CURRENTDIR/share:$XDG_DATA_DIRS"
 
 version0=$(wget -q https://api.github.com/repos/Samueru-sama/AppMan-AppImage/releases -O - | grep -i continuous | grep browser_download_url | awk -F - '{print $(NF-1)}')
 version=$(cat $CURRENTDIR/version)
-if [ "$version" != "$version0" ] && [ ping -q -c1 github.com 2>&1 ] ; then
-	repeat 10 echo '------WARNING APPMAN IS OUTDATED, RUN >>> appman -u <<< TO UPDATE APPMAN NOW/!------'
-	echo "CURRENT VERSION = $version"
-	echo "NEW VERSION = $version0"
+if [ "$version" != "$version0" ]; then
+	ping -q -c1 github.com >/dev/null 2>&1 && echo '------WARNING APPMAN IS OUTDATED, RUN >>> appman -u <<< TO UPDATE/!------'
 fi
 
 if [ "$1" = "--TUI" ] || [ "$1" = "--tui" ]; then
