@@ -33,7 +33,7 @@ cat >> ./AppRun << 'EOF'
 #!/bin/sh
 
 CURRENTDIR="$(readlink -f "$(dirname "$0")")"
-export PATH="$PATH:$CURRENTDIR/bin"
+export PATH="$CURRENTDIR/bin:$PATH"
 export XDG_DATA_DIRS="$CURRENTDIR/share:$XDG_DATA_DIRS"
 
 version0=$(wget -q https://api.github.com/repos/Samueru-sama/AppMan-AppImage/releases -O - | grep -i continuous | grep browser_download_url | awk -F - '{print $(NF-1)}')
