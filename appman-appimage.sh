@@ -12,7 +12,7 @@ wget "http://ftp.gnu.org/gnu/wget/wget-latest.tar.gz"
 tar fx ./*tar* && cd ./wget* && ./configure --prefix="$CURRENTDIR" && make && make install && cd .. && rm -rf ./wget* ./*tar* || exit 1
 
 "$CURRENTDIR/bin/wget" "http://zsync.moria.org.uk/download/zsync-0.6.2.tar.bz2" # This also tests that this wget works
-tar fx ./*tar* && cd ./zsync* && ./configure --prefix="$CURRENTDIR" && make && make install && cd .. && rm -rf ./zsync* ./*tar* || exit 1
+tar fx ./*tar* && cd ./zsync* && ./configure --prefix="$CURRENTDIR" && sed -i 's/LDFLAGS =/LDFLAGS = -static/g' ./Makefile && make && make install && cd .. && rm -rf ./zsync* ./*tar* || exit 1
 
 find ./bin/* -type f -executable -exec sed -i -e "s|/usr|././|g" {} \; # Patch binaries
 
