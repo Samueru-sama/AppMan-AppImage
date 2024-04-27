@@ -9,7 +9,7 @@ mkdir -p ./"$APP/$APPDIR" && cd ./"$APP/$APPDIR" || exit 1
 # MAKE AND INSTALL WGET AND ZSYNC HERE
 CURRENTDIR="$(readlink -f "$(dirname "$0")")" # DO NOT MOVE THIS
 wget "http://ftp.gnu.org/gnu/wget/wget-latest.tar.gz"
-tar fx ./*tar* && cd ./wget* && ./configure --prefix="$CURRENTDIR" LDFLAGS="-static" && make && make install && cd .. && rm -rf ./wget* ./*tar* || exit 1
+tar fx ./*tar* && cd ./wget* && ./configure --prefix="$CURRENTDIR" && make && make install && cd .. && rm -rf ./wget* ./*tar* || exit 1
 
 "$CURRENTDIR/bin/wget" "http://zsync.moria.org.uk/download/zsync-0.6.2.tar.bz2" # This also tests that this wget works
 tar fx ./*tar* && cd ./zsync* && ./configure --prefix="$CURRENTDIR" && make && make install && cd .. && rm -rf ./zsync* ./*tar* || exit 1
