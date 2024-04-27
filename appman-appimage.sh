@@ -20,13 +20,13 @@ find ./bin/* -type f -executable -exec sed -i -e "s|/usr|././|g" {} \; # Patch b
 wget -q "https://raw.githubusercontent.com/ivan-hc/AM/main/APP-MANAGER" -O ./appman && chmod a+x ./appman && mv ./appman ./bin/appman || exit 1
 
 # GET THE GUN I MEAN GUM
-mkdir ./tmp && cd ./tmp || exit 1
-REPO="charmbracelet/gum"
-version=$(wget -q https://api.github.com/repos/"$REPO"/releases -O - | grep browser_download_url | grep -i nux_x86_64.tar.gz | cut -d '"' -f 4 | head -1)
-wget "$version" -O download.tar.gz && tar fx ./*tar* && cd .. && mv ./tmp/gum ./bin/gum && rm -rf ./tmp || exit 1
+#mkdir ./tmp && cd ./tmp || exit 1
+#REPO="charmbracelet/gum"
+#version=$(wget -q https://api.github.com/repos/"$REPO"/releases -O - | grep browser_download_url | grep -i nux_x86_64.tar.gz | cut -d '"' -f 4 | head -1)
+#wget "$version" -O download.tar.gz && tar fx ./*tar* && cd .. && mv ./tmp/gum ./bin/gum && rm -rf ./tmp || exit 1
 
 # GET TUI
-wget -q "https://raw.githubusercontent.com/ivan-hc/AM/7d7f82fa49b4c021611ce052f13879dd74be8537/apptui" -O ./apptui && chmod a+x ./apptui && mv ./apptui ./bin/apptui || exit 1
+#wget -q "https://raw.githubusercontent.com/ivan-hc/AM/7d7f82fa49b4c021611ce052f13879dd74be8537/apptui" -O ./apptui && chmod a+x ./apptui && mv ./apptui ./bin/apptui || exit 1
 
 # AppRun
 cat >> ./AppRun << 'EOF'
