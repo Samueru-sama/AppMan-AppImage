@@ -5,16 +5,16 @@ APPDIR=AppMan.AppDir
 
 if [ -z "$APP" ]; then exit 1; fi
 mkdir -p ./"$APP/$APPDIR" && cd ./"$APP/$APPDIR" || exit 1
-
-# MAKE AND INSTALL WGET AND ZSYNC HERE
 CURRENTDIR="$(readlink -f "$(dirname "$0")")" # DO NOT MOVE THIS
-wget "http://ftp.gnu.org/gnu/wget/wget-latest.tar.gz"
-tar fx ./*tar* && cd ./wget* && ./configure --prefix="$CURRENTDIR" LDFLAGS="-static" && make && make install && cd .. && rm -rf ./wget* ./*tar* || exit 1
 
+# GET AND INSTALL BUSYBOX WGET HERE
+mkdir ./bin && cd ./bin && wget https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox_WGET -O wget && chmod a+x ./wget && cd .. || exit 1
+
+# MAKE AND INSTALL ZSYNC HERE
 "$CURRENTDIR/bin/wget" "http://zsync.moria.org.uk/download/zsync-0.6.2.tar.bz2" # This also tests that this wget works
 tar fx ./*tar* && cd ./zsync* && ./configure --prefix="$CURRENTDIR"  && make && make install && cd .. && rm -rf ./zsync* ./*tar* || exit 1
-
 find ./bin/* -type f -executable -exec sed -i -e "s|/usr|././|g" {} \; # Patch binaries
+
 
 # GET APPMAN
 wget -q "https://raw.githubusercontent.com/ivan-hc/AM/main/APP-MANAGER" -O ./appman && chmod a+x ./appman && mv ./appman ./bin/appman || exit 1
