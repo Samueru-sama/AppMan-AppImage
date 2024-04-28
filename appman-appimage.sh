@@ -67,7 +67,7 @@ Categories=Utility;
 EOF
 
 # MAKE APPIMAGE
-APPIMAGETOOL=$(wget -q https://api.github.com/repos/probonopd/go-appimage/releases -O - | sed 's/"//g' | grep -o 'https.*continuous.*tool.*86_64.*mage$')
+APPIMAGETOOL=$(wget -q https://api.github.com/repos/probonopd/go-appimage/releases -O - | sed 's/"/ /g; s/ /\n/g' | grep -o 'https.*continuous.*tool.*86_64.*mage$')
 cd .. && wget -q "$APPIMAGETOOL" -O ./appimagetool && chmod a+x ./appimagetool || exit 1
 
 # Do the thing!
