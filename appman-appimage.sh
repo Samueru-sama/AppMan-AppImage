@@ -6,7 +6,7 @@ APPDIR=AppMan.AppDir
 [ -n "$APP" ] && mkdir -p ./"$APP/$APPDIR/bin" && cd ./"$APP/$APPDIR/bin" || exit 1
 
 # GET AND INSTALL BUSYBOX WGET HERE
-wget https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox_WGET -O wget && chmod a+x ./wget || exit 1
+wget https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox_WGET -O wget && chmod a+x ./wget && cd .. || exit 1
 
 # MAKE AND INSTALL ZSYNC HERE
 CURRENTDIR="$(readlink -f "$(dirname "$0")")" # DO NOT MOVE THIS
